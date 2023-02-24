@@ -4,8 +4,15 @@
 N = int(input())
 arr = [[-1]*1001 for _ in range(1001)]  # 1001*1001 격자
 
+mx_i = 0
+mx_j = 0
+
 for paper in range(N) :
     a, b, c, d = map(int,input().split())
+    if a+c > mx_i :
+        mx_i = a+c      # 시간 줄이기용 범위 구하기 조건
+    if b+d > mx_j :
+        mx_j = b+d
     for i in range(a, a+c) :
         for j in range(b, b+d) :
             arr[i][j] = paper           # 색종이 붙여주기
@@ -13,8 +20,8 @@ for paper in range(N) :
 ans = []
 for paper in range(N) :
     cnt = 0
-    for i in range(1001) :
-        for j in range(1001) :
+    for i in range(mx_i) :
+        for j in range(mx_j) :
             if arr[i][j] == paper :     # 다 붙인 뒤의 색종이 면적 구해서 기록
                 cnt += 1
     else :
