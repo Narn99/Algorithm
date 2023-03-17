@@ -3,6 +3,7 @@
 # 그 뒤, 방문한 적 없는 점 하나 잡고 또 반복
 
 import sys
+from collections import deque
 
 N, M = map(int, sys.stdin.readline().split())
 arr = [[] for _ in range(N+1)]
@@ -19,9 +20,9 @@ for num in range(1, N+1) :
     if num in v :
         continue
     else :
-        Q = [num]
+        Q = deque([num])
         while Q :
-            now = Q.pop(0)
+            now = Q.popleft()
             to = arr[now]
             for i in to :
                 if i not in v :
