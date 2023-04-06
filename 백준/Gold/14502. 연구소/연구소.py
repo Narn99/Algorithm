@@ -13,24 +13,24 @@ def check() :
     global ans
     wall = deque()
     for i in range(le-2) :
-        for j in range(i+1, le-1) :
+        for j in range(i+1, le-1) :     # 모든 벽 경우의 수
             for k in range(j+1, le) :
                 wall.append((empty[i],empty[j],empty[k]))
 
     for case in wall :
-        v = [[0]*M for _ in range(N)]
+        v = [[0]*M for _ in range(N)]   # BFS 돌릴 때마다 방문 배열 초기화
         cnt = BFS(case, v)
-        if le - 3 - cnt > ans :
+        if le - 3 - cnt > ans :     # 바이러스부터 BFS 돌려서, 빈 칸의 갯수가 가장 최대일 때 갱신
             ans = le - 3 - cnt
 
 def BFS(case, v) :
     for wall in case :
-        v[wall[0]][wall[1]] = 1
+        v[wall[0]][wall[1]] = 1     # 벽 세운 곳은 간편하게 방문 처리로
     Q = deque([i for i in virus])
     cnt = 0
 
     while Q :
-        ci, cj = Q.popleft()
+        ci, cj = Q.popleft()        # BFS로 바이러스 갈 수 있는 곳 전부 탐색
         for dr in range(4) :
             ni, nj = ci+di[dr], cj+dj[dr]
             if 0<=ni<N and 0<=nj<M :
