@@ -39,12 +39,15 @@ def check(n, sm, pieces) :
                 elif temp[num][0] == 15 :
                     temp[num][1] = 3
                     temp[num][0] = 0
+
+            # 인덱스 넘어가는건 = 도착점에 도달한 것
             if temp[num][0] >= len(road[temp[num][1]]) :
                 temp[num][0] = -1
                 check(n+1, sm, temp)
             else :
                 num_score = road[temp[num][1]][temp[num][0]]
                 for i in range(4) :
+                    # 마지막 도착점에 도달해있는건 중복 확인 안 해도 되므로 continue
                     if temp[i][0] == -1 :
                         continue
                     if i != num :
@@ -52,7 +55,7 @@ def check(n, sm, pieces) :
                         if num_score == i_score :
                             if num_score == 30 :
                                 # 30일 때는 루트 3의 다른 위치에 30이 따로 있기 때문에,
-                                # 루트랑 위치 비교를 다 해줘야 함.
+                                # 루트랑 인덱스 비교를 다 해줘야 함.
                                 # 특히 둘 다 3루트라면, 값이 30이어도 위치가 다를 수 있음. 인덱스 비교
                                 if temp[num][1] == 3 and temp[i][1] == 3 :
                                     if temp[num][0] == temp[i][0] :
@@ -65,6 +68,7 @@ def check(n, sm, pieces) :
                                         break
                                 else :
                                     break
+                            # 점수도 같고, 루트도 같으면 그냥 같은 위치
                             elif temp[i][1] == temp[num][1] :
                                 break
                             # 25, 35, 40은 3루트에 다 있으니까, 1~3에선 루트 달라도 같은거
