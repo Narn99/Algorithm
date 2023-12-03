@@ -1,1 +1,1 @@
-# BAEKJOON
+# Algorithm
